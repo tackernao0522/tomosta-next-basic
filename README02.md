@@ -145,3 +145,122 @@ export default function Home() {
   )
 }
 ```
+
+- 03 JSX での CSS の書き方
+
+* `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <h1 className="site-title" style={{ backgroundColor: '#9f9' }}>
+        {title}
+      </h1>
+      <p>学ぶ。をちゃんと</p>
+    </>
+  )
+}
+```
+
+### JSX で<style></style>を利用
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <h1 className="site-title" style={{ backgroundColor: '#9f9' }}>
+        {title}
+      </h1>
+      <p>学ぶ。をちゃんと</p>
+      <style jsx>{`
+        h1 {
+          color: white;
+          background-color: red !important;
+        }
+      `}</style>
+    </>
+  )
+}
+```
+
+### 外部参照 CSS
+
+- `styles/Home.module.css`を編集<br>
+
+(.module が付いてないと global CSS が使えない)<br>
+
+```css:Home.module.css
+.mytitle {
+  font-size: 1.2em;
+}
+```
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+import Styles from '../styles/Home.module.css'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <h1 className={Styles.mytitle} style={{ backgroundColor: '#9f9' }}>
+        {title}
+      </h1>
+      <p>学ぶ。をちゃんと</p>
+      <style jsx>{`
+        h1 {
+          color: white;
+        }
+      `}</style>
+    </>
+  )
+}
+```
+
+### グローバルで CSS を書く
+
+- `styles/mysite.css`ファイルを作成(\_app.js ファイルからは読み込める)<br>
+
+```css:mysite.css
+body {
+  color: red;
+}
+```
+
+```js:_app.js
+// import '../styles/globals.css' // リセットをかけたくない場合はコメントアウトする
+import '../styles/mysite.css'
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+```
+
+- `styles/globals.css`を削除しておく<br>
+
+# 新規ページの作成から
