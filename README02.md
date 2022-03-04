@@ -9,3 +9,53 @@ https://github.com/tomostajp/next-site<br>
 # Next.js プロジェクトの作成
 
 - `$ npx create-next-app next-mysite`を実行<br>
+
+## 01 ローカルサーバー起動
+
+- `$ npm run build`を実行<br>
+
+* `$ npm run start`を実行<br>
+
+- http://localhost:3000 にアクセスしてみる<br>
+
+* `Control + C`でサーバー終了<br>
+
+- `$ npm run dev`を実行(build という作業が不要になる)<br>
+
+* http://localhost:3000 にアクセスしてみる<br>
+
+## 一番最初のプログラム
+
+`例`<br>
+
+- `/pages/api/index.js`<br>
+
+```js:index.js
+import Head from 'next/head'
+
+export default function Home() {
+  let title = 'ともすた'
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <h1>{title}</h1>
+      <p>学ぶ。をちゃんと</p>
+    </h1>
+  )
+}
+```
+
+### ハンズオン
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+export default function Home() {
+  <>
+    return <h1>ともすた</h1>
+    <p>学ぶ。をちゃんと</p>
+  </>
+}
+```
