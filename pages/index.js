@@ -1,7 +1,14 @@
+import Head from 'next/head'
+
 export default function Home() {
+  let title = 'ともすた'
+
   return (
     <>
-      <h1>ともすた</h1>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <h1 className='site-title' style={{ color: 'red' }}>{title}</h1>
       <p>学ぶ。をちゃんと</p>
     </>
   )

@@ -53,9 +53,95 @@ export default function Home() {
 
 ```js:index.js
 export default function Home() {
-  <>
+  ;<>
     return <h1>ともすた</h1>
     <p>学ぶ。をちゃんと</p>
   </>
+}
+```
+
+## 02 JSX を使う
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+export default function Home() {
+  let title = 'ともすた'
+  return (
+    <>
+      <h1>{title}</h1>
+      <p>学ぶ。をちゃんと</p>
+    </>
+  )
+}
+```
+
+### head 要素を出力する
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head' // 追記
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      // 追記
+      <Head>
+        <title>{title}</title>
+      </Head>
+      //
+      <h1>{title}</h1>
+      <p>学ぶ。をちゃんと</p>
+    </>
+  )
+}
+```
+
+### HTML タグに class をつける
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <h1 className="site-title">{title}</h1>
+      <p>学ぶ。をちゃんと</p>
+    </>
+  )
+}
+```
+
+### HTML タグに style 属性を書く
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <h1 className="site-title" style={{ color: 'red' }}>
+        {title}
+      </h1>
+      <p>学ぶ。をちゃんと</p>
+    </>
+  )
 }
 ```
