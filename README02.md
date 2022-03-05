@@ -264,3 +264,33 @@ export default MyApp
 - `styles/globals.css`を削除しておく<br>
 
 # 新規ページの作成から
+
+meta タグ設定参考: https://qiita.com/TK-C/items/cd34d0f6d4b001053443 <br>
+
+- `pages/about`ディレクトリを作成<br>
+
+* `pages/about/index.js`ファイルを作成<br>
+
+```js:index.js
+export default function About() {
+  return (
+    <>
+      <h1>About</h1>
+    </>
+  )
+}
+```
+
+- http://localhost:3000/about にアクセス
+
+* `pages/about/company.js`ファイルを作成<br>
+
+```js:company.js
+export default function Company() {
+  return (
+    <>
+      <h1>Company</h1>
+    </>
+  )
+}
+```
