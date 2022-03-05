@@ -1,16 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Styles from '../styles/Home.module.css'
+import Content from './components/content'
+import Header from './components/header'
 
 export default function Home() {
   let title = 'ともすた'
 
   return (
-    <>
+    <Content>
       <Head>
         <title>{title}</title>
       </Head>
-      <h1 className={Styles.mytitle} style={{ backgroundColor: '#9f9' }}>{title}</h1>
+      <Header title={title} />
       <p>学ぶ。をちゃんと</p>
       <div>
         <Link href="/about"><a>About</a></Link>
@@ -20,6 +21,6 @@ export default function Home() {
           color: white;
         }
       `}</style>
-    </>
+    </Content>
   )
 }

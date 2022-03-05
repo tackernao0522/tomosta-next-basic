@@ -1,7 +1,10 @@
+import Content from "../components/content";
+import Header from "../components/header";
+
 export default function About() {
   return (
-    <>
-      <h1>About</h1>
-    </>
+    <Content>
+      <Header title={"About"} />
+    </Content>
   )
 }

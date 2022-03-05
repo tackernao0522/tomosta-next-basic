@@ -334,3 +334,256 @@ export default function Home() {
   )
 }
 ```
+
+## コンポーネントとレイアウト
+
+### オリジナルコンポーネント
+
+`例`<br>
+
+`/pages/components/header.js`<br>
+
+```js:header.js
+export default function Header(props) {
+  return <h1>{props.title}</h1>
+}
+```
+
+`pages/index.js`<br>
+
+```js:index.js
+import Header from './components/header' // パラメーターが渡せる
+...
+<Header title={'ともすた'}></Header>
+```
+
+### ハンズオン
+
+- `pages/components`ディレクトリを作成<br>
+
+* `pages/components/header.js`ファイルを作成<br>
+
+```js:header.js
+const Header = () => {
+  return <h1>共通タイトル</h1>
+}
+
+export default Header
+```
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+import Link from 'next/link'
+// 追記
+import Header from './components/header'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      // 編集
+      <Header />
+      <p>学ぶ。をちゃんと</p>
+      <div>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </div>
+      <style jsx>{`
+        h1 {
+          color: white;
+        }
+      `}</style>
+    </>
+  )
+}
+```
+
+- `pages/about/index.js`を編集<br>
+
+```js:index.js
+import Header from '../components/header'
+
+export default function About() {
+  return (
+    <>
+      <Header />
+    </>
+  )
+}
+```
+
+- `pages/components/header.js`を編集<br>
+
+```js:header.js
+const Header = (props) => {
+  const { title } = props
+
+  return <h1>{title}</h1>
+}
+
+export default Header
+```
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+import Link from 'next/link'
+import Header from './components/header'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <Header title={title} />
+      <p>学ぶ。をちゃんと</p>
+      <div>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </div>
+      <style jsx>{`
+        h1 {
+          color: white;
+        }
+      `}</style>
+    </>
+  )
+}
+```
+
+- `pages/about/index.js`を編集<br>
+
+```js:index.js
+import Header from '../components/header'
+
+export default function About() {
+  return (
+    <>
+      <Header title={'About'} />
+    </>
+  )
+}
+```
+
+### レイアウト
+
+`例`<br>
+
+``/pages/components/content.js`<br>
+
+```js:content.js
+export default function Content({ children }) {
+  return (
+    <div>{children}</div> // {childrenで内容を差し込める}
+  )
+}
+```
+
+`pages/index.js`<br>
+
+```js:index.js
+import Content from './components/content'
+...
+return (
+  <Content> // <Content>タグが使えるように
+    <Head>
+      ...
+)
+```
+
+### ハンズオン
+
+- `pages/components/content.js`ファイルを作成<br>
+
+```js:content.js
+const Content = ({ children }) => {
+  return (
+    <>
+      <div className="container">{children}</div>
+      <hr />
+      <footer>©︎ 2021 ともすた</footer>
+    </>
+  )
+}
+
+export default Content
+```
+
+または<br>
+
+- `pages/components/content.js`<br>
+
+```js:content.js
+const Content = (props) => {
+  const { children } = props
+  return (
+    <>
+      <div className="container">{children}</div>
+      <hr />
+      <footer>©︎ 2021 ともすた</footer>
+    </>
+  )
+}
+
+export default Content
+```
+
+- `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+import Link from 'next/link'
+import Content from './components/content'
+import Header from './components/header'
+
+export default function Home() {
+  let title = 'ともすた'
+
+  return (
+    <Content>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <Header title={title} />
+      <p>学ぶ。をちゃんと</p>
+      <div>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </div>
+      <style jsx>{`
+        h1 {
+          color: white;
+        }
+      `}</style>
+    </Content>
+  )
+}
+```
+
+- `pages/about/index.js`を編集<br>
+
+```js:index.js
+import Content from '../components/content'
+import Header from '../components/header'
+
+export default function About() {
+  return (
+    <Content>
+      <Header title={'About'} />
+    </Content>
+  )
+}
+```
