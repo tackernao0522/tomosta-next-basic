@@ -587,3 +587,54 @@ export default function About() {
   )
 }
 ```
+
+## SWR で JSON データを取得する
+
+- `pages/api/hello.js`を`pages/api/message.js`にリネームして編集<br>
+
+```js:message.js
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
+export default function handler(req, res) {
+  res.status(200).json({ message: '学ぶ。をちゃんと' })
+}
+```
+
+- `$ npm install swr@0.5.6 --save-dev`を実行<br>
+
+* `pages/index.js`を編集<br>
+
+```js:index.js
+import Head from 'next/head'
+import Link from 'next/link'
+import useSWR from 'swr'
+import Content from './components/content'
+import Header from './components/header'
+
+export default function Home() {
+  let title = 'ともすた'
+  const { data, error } = useSWR('/api/message')
+  if (error) return <div>faild to load</div>
+  if (!data) return <div>loading...</div>
+
+  return (
+    <Content>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <Header title={title} />
+      <p>{data.message}</p>
+      <div>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </div>
+      <style jsx>{`
+        h1 {
+          color: white;
+        }
+      `}</style>
+    </Content>
+  )
+}
+```
