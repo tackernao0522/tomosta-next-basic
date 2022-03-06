@@ -1,10 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import useSWR from 'swr'
 import Content from './components/content'
 import Header from './components/header'
 
 export default function Home() {
   let title = 'ともすた'
+  const { data, error } = useSWR('/api/message')
+  if (error) return <div>faild to load</div>
+  if (!data) return <div>loading...</div>
 
   return (
     <Content>
@@ -12,7 +16,7 @@ export default function Home() {
         <title>{title}</title>
       </Head>
       <Header title={title} />
-      <p>学ぶ。をちゃんと</p>
+      <p>{data.message}</p>
       <div>
         <Link href="/about"><a>About</a></Link>
       </div>
